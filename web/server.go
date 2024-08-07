@@ -15,15 +15,11 @@ type Server struct {
 }
 
 func NewServer() *Server {
-	cfg, err := config.LoadConfig()
-	if err != nil {
-		log.Fatalf("load config fail: %v" + err.Error())
-	}
-	config.SetGlobalConfig(cfg)
-
+	// 加载配置
+	serverCfg := config.GlobalConfig().Server
 	return &Server{
-		name:   cfg.Server.Name,
-		addr:   fmt.Sprintf("%s:%d", cfg.Server.Addr, cfg.Server.Port),
+		name:   serverCfg.Name,
+		addr:   fmt.Sprintf("%s:%d", serverCfg.Addr, serverCfg.Port),
 		router: NewRouter(),
 	}
 }

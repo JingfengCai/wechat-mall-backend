@@ -63,6 +63,15 @@ func defaultConfig() *Config {
 	return cfg
 }
 
+func InitConfig() error {
+	cfg, err := LoadConfig()
+	if err != nil {
+		return err
+	}
+	SetGlobalConfig(cfg)
+	return nil
+}
+
 // GlobalConfig 获取全局配置对象
 func GlobalConfig() *Config {
 	return globalConfig.Load().(*Config)
